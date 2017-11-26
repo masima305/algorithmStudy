@@ -2,6 +2,41 @@ import java.util.Scanner;
 
 public class studyClass {
 	
+	
+	
+	static void prob2588(){
+
+		Scanner scanner = new Scanner(System.in);
+		int num_a = scanner.nextInt();
+		int num_b = scanner.nextInt();;
+		
+		int b_100 = num_b/100;
+		int b_1 = num_b%10;
+		int b_10 = (num_b%100)/10;
+	
+		System.out.println(num_a*b_1);
+		System.out.println(num_a*b_10);
+		System.out.println(num_a*b_100);
+		System.out.println(num_a*num_b);
+	}
+	static void prob2443(){
+		//prob 2443
+//		첫째 줄에는 별 2*N-1개, 둘째 줄에는 별 2*N-3개, ..., N번째 줄에는 별 1개를 찍는 문제
+//
+//		별은 가운데를 기준으로 대칭이어야 한다.
+		Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		
+		for (int i = 0; i < n ; i++){
+			for (int j = 0; j < i; j++) {
+				System.out.print(" ");
+			}
+			for (int j = 0; j < 2*n-(i*2)-1; j++) {
+				System.out.print("*");
+			}
+			System.out.println();	
+		}
+	}
 	static void prob2847(){
 		int count = 0;
 		Scanner s = new Scanner(System.in);
@@ -22,53 +57,29 @@ public class studyClass {
 		}
 		System.out.println(count);
 	}
-	static void prob2846_unsolved(){
+	static void prob2846(){
 		Scanner scanner = new Scanner(System.in);
 		int max = 0;
+		int max_temp = 0;
 		int road_count = scanner.nextInt();
-		int incline_start = 0;
-		int incline_end = 0;
+		int [] road_list = new int [road_count]; 		
 
-		for (int i = 0; i < road_count; i++) {
-			int temp = scanner.nextInt();
-			if (incline_start == 0 ){
-				incline_start = temp;
-			}
-			else{
-				if ( temp < incline_start || temp == incline_end){
-					int temp_max = incline_end - incline_start;
-
-					if (max < temp_max){
-						max = temp_max;
-					}
-					incline_start = temp;
-					incline_end = temp;
-				}else if(incline_start < temp){
-					incline_end = temp;
-					int temp_max = incline_end - incline_start;
-
-					if (max < temp_max){
-						max = temp_max;
-					}
+		road_list[0] = scanner.nextInt();
+		for (int i = 1; i < road_list.length; i++) {
+			road_list[i] = scanner.nextInt();
+			if (road_list[i] > road_list[i-1]){ //전에꺼보다 크면 오르막길.
+				max_temp += road_list[i]-road_list[i-1];
+				if (max < max_temp){
+					max = max_temp;
 				}
+			}else{ //같거나 적으면
+				if (max < max_temp){
+					max = max_temp;
+				}
+				max_temp = 0;
 			}
-			System.out.println("===================="+i+"=====================");
-			System.out.println("max : "+max);
-			System.out.println("temp :"+temp);
-			System.out.println("incl_start :"+incline_start);
-			System.out.println("incl_end :"+incline_end);
-		} 
+		}
 		System.out.println(max);
-
-		/*10
-		12 20 1 3 4 4 11 11 14 1
-		11
-		1 2 2 3 4 5 5 6 7 8 9
-		9
-		10 9 9 8 8 7 7 6 6
-		9
-		10 10 10 10 10 10 10 10 10
-		*/
 	}
 	static void prob1001 (){
 		Scanner s = new Scanner(System.in);
@@ -84,17 +95,17 @@ public class studyClass {
 	}
 	static void prob9653 (){
 		String logo[]={	
-			 "    8888888888  888    88888 ",
-			 "   88     88   88 88   88  88 ",
-			 "    8888  88  88   88  88888 ",
-			 "       88 88 888888888 88   88 ",
-			 "88888888  88 88     88 88    888888 ",
-		     "",
-			 "88  88  88   888    88888    888888 ",
-			 "88  88  88  88 88   88  88  88 ",
-			 "88 8888 88 88   88  88888    8888 ",
-			 " 888  888 888888888 88  88      88 ",
-			 "  88  88  88     88 88   88888888"
+				"    8888888888  888    88888 ",
+				"   88     88   88 88   88  88 ",
+				"    8888  88  88   88  88888 ",
+				"       88 88 888888888 88   88 ",
+				"88888888  88 88     88 88    888888 ",
+				"",
+				"88  88  88   888    88888    888888 ",
+				"88  88  88  88 88   88  88  88 ",
+				"88 8888 88 88   88  88888    8888 ",
+				" 888  888 888888888 88  88      88 ",
+				"  88  88  88     88 88   88888888"
 		};
 		for(int i= 0; i < logo.length ; i++){
 			System.out.println(logo[i]);
@@ -143,13 +154,13 @@ public class studyClass {
 		 * 5킬로그램 3개와 3킬로그램 1개를 배달하면, 더 적은 개수의 봉지를 배달할 수 있다.
 		 * 상근이가 설탕을 정확하게 N킬로그램 배달해야 할 때, 봉지 몇 개를 가져가면 되는지 그 수를 구하는 프로그램을 작성하시오.
 		 */
-		
+
 		int i = m;
 		int count_5 = 0;
 		int count_3 = 0;
 		int count_t = -1;
 		int rest = 0;
-		
+
 		if (i>=5){
 			count_5 += i/5;
 			rest = i%5;
@@ -174,6 +185,4 @@ public class studyClass {
 		}
 		System.out.println("*"+i+" count5:"+count_5+" count3:"+count_3+" rest:"+rest+" total:"+count_t);
 	}
-	
-
 }
