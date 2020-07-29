@@ -1,3 +1,4 @@
+package prob200700;
 import java.util.Scanner;
 
 public class studyClass {
